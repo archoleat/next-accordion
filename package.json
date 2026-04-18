@@ -48,7 +48,7 @@
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "@types/bun": "^1.2.20",
-    "@typescript-eslint/eslint-plugin": "^8.48.0",
+    "@typescript-eslint/eslint-plugin": "^8.58.2",
     "@typescript-eslint/parser": "^8.48.0",
     "conventional-changelog-conventionalcommits": "^9.1.0",
     "editorconfig-checker": "^6.1.1",
