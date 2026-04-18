@@ -1,0 +1,13 @@
+version: 2
+
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: semiannually
+
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: semiannually
+    versioning-strategy: increase

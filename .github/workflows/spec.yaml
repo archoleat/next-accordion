@@ -1,0 +1,40 @@
+name: Spec
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'package.json'
+      - 'README.md'
+      - 'src/**/*.ts'
+  push:
+    branches:
+      - main
+    paths:
+      - 'package.json'
+      - 'README.md'
+      - 'src/**/*.ts'
+
+permissions:
+  contents: read
+
+jobs:
+  spec:
+    name: Spec
+
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
+
+      - name: Set Up Bun
+        uses: oven-sh/setup-bun@735343b667d3e6f658f44d0eca948eb6282f2b76
+
+      - name: Install Dependencies
+        run: bun ci
+
+      - name: Specs
+        run: bun test

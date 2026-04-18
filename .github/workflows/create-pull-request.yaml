@@ -1,0 +1,24 @@
+name: Create Pull Request
+
+on:
+  push:
+
+permissions:
+  pull-requests: write
+
+jobs:
+  create-pull-request:
+    name: Create Pull Request
+
+    if: ${{ github.actor != 'dependabot[bot]' }}
+
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Create Pull Request
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PULL_REQUEST_BRANCH: main
+          PULL_REQUEST_TITLE: ${{ github.event.head_commit.message }}
+        uses: vsoch/pull-request-action@882391869b75196e039a732df05085312c456995

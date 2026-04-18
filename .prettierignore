@@ -1,0 +1,8 @@
+# Files
+.editorconfig-checker.json
+*.md
+
+# Ignores
+.gitignore
+.prettierignore
+.remarkignore
