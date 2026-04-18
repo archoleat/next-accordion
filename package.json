@@ -52,7 +52,7 @@
     "@typescript-eslint/parser": "^8.48.0",
     "conventional-changelog-conventionalcommits": "^9.1.0",
     "editorconfig-checker": "^6.1.1",
-    "eslint": "^9.39.2",
+    "eslint": "^10.2.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-define-config": "^2.1.0",
     "eslint-import-resolver-typescript": "^4.4.4",
