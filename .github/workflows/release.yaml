@@ -37,12 +37,12 @@ jobs:
           token: ${{ steps.generate_token.outputs.token }}
 
       - name: Set Up Node
-        uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f
         with:
           node-version: latest
 
       - name: Set Up Bun
-        uses: oven-sh/setup-bun@735343b667d3e6f658f44d0eca948eb6282f2b76
+        uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6
 
       - name: Install Dependencies
         run: bun ci
