@@ -26,12 +26,12 @@ jobs:
         run: bun ci
 
       - name: Extract Commit Message (Push)
-        if: ${{ github.event_name }} == 'push'
+        if: ${{ github.event_name == 'push' }}
         run: |
           git log -1 --pretty=%B > commit_message.txt
 
       - name: Extract Commit Message (Pull Request)
-        if: ${{ github.event_name }} == 'pull_request'
+        if: ${{ github.event_name == 'pull_request' }}
         run: |
           git show -s --format=%B > commit_message.txt
 
