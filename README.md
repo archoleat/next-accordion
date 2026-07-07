@@ -1,177 +1,112 @@
-# NPM Template
+# Next Accordion
 
-![Specs](https://img.shields.io/github/actions/workflow/status/archoleat/npm-template/spec.yaml?label=Specs)
-![Commitlint](https://img.shields.io/github/actions/workflow/status/archoleat/npm-template/commitlint.yaml?label=Commitlint)
-![Editorconfig](https://img.shields.io/github/actions/workflow/status/archoleat/npm-template/editorconfig.yaml?label=Editorconfig)
-![Prettier](https://img.shields.io/github/actions/workflow/status/archoleat/npm-template/prettier.yaml?label=Prettier)
-![ESLint](https://img.shields.io/github/actions/workflow/status/archoleat/npm-template/eslint.yaml?label=ESLint)
-![Remark](https://img.shields.io/github/actions/workflow/status/archoleat/npm-template/remark.yaml?label=Remark)
+![Specs](https://img.shields.io/github/actions/workflow/status/archoleat/next-accordion/spec.yaml?label=Specs)
+![Commitlint](https://img.shields.io/github/actions/workflow/status/archoleat/next-accordion/commitlint.yaml?label=Commitlint)
+![Editorconfig](https://img.shields.io/github/actions/workflow/status/archoleat/next-accordion/editorconfig.yaml?label=Editorconfig)
+![Prettier](https://img.shields.io/github/actions/workflow/status/archoleat/next-accordion/prettier.yaml?label=Prettier)
+![ESLint](https://img.shields.io/github/actions/workflow/status/archoleat/next-accordion/eslint.yaml?label=ESLint)
+![Remark](https://img.shields.io/github/actions/workflow/status/archoleat/next-accordion/remark.yaml?label=Remark)
 
 ## Table of Contents
 
-- [Getting Started](#getting-started)
-- [Features](#features)
-- [Scripts](#scripts)
-- [Workflows](#workflows)
-- [Change of Maintainer](#change-of-maintainer)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Props](#props)
 - [Contributing](#contributing)
 - [License](#license)
 
-**Archoleat NPM Template** is a template repository designed for quickly
-starting new projects with pre-configured tools and best development practices.
+Animated React accordion using details and summary
 
-This template includes ready-made solutions for integration with:
+## Installation
 
-- **Git**.
-- **GitHub**.
-- **Commitlint**.
-- **Conventional Commits**.
-- **Husky**.
-- **Pre Commit Hook**.
-- **Lint Staged**.
-- **GitHub Actions**.
-- **Semantic Release**.
-- **Bun**.
-- **Rollup**.
-- **Specs**.
-- **EditorConfig**.
-- **ESLint**.
-- **Remark**.
-- **Prettier**.
-- **TypeScript**.
-- **Dependabot**.
-- **Welcome Bot**.
+```sh
+bun i -D @archoleat/next-accordion
+```
 
-## Getting Started
+## Usage
 
-1. **Create a Repository**: Use this template
-   to create a new repository on GitHub.
+### Single item
 
-   > Since this is a **Public Template** you can click the button
-   > **Use this template** for a faster and more convenient cloning.
+Render a single collapsible panel:
 
-1. **Clone the Repository**: Clone your new repository to your local machine.
+```tsx
+import { AccordionItem } from '@archoleat/next-accordion';
 
-1. **Start Development**: Develop your project,
-   making changes according to your project's needs.
+const Example = () => (
+  <AccordionItem trigger="Trigger">
+    <p>Content</p>
+  </AccordionItem>
+);
 
-1. **Configure GitHub Actions**: Modify GitHub Actions
-   settings to fit your requirements.
+export { Example };
+```
 
-## Features
+### List of items
 
-- **Flexibility**: Easily customizable template to adapt
-  to different project types.
+Render a list of panels from an array of data:
 
-- **Git and GitHub Integration**: Pre-configured `.gitignore`
-  and `.gitattributes` for efficient work with Git and GitHub.
+```tsx
+import { Accordion } from '@archoleat/next-accordion';
 
-  - **Conventional Commits & Commitlint**: If you don't want
-    to think about how to write a commit every time,
-    these plugins will help you.
+const items = [
+  { id: 1, trigger: 'First', content: <p>First content</p> },
+  { id: 2, trigger: 'Second', content: <p>Second content</p> },
+];
 
-    > It will be especially useful for teams that
-    > have an ongoing debate about writing commits.
+const Example = () => <Accordion exclusive items={items} />;
 
-  - **Husky, Lint Staged & Pre Commit**: Won't let you submit
-    bad code to the repository!
+export { Example };
+```
 
-- **Continuous Integration (CI)**: Built-in CI support using GitHub Actions
-  for automatic linting, testing and building of your code with each change.
+## Props
 
-  > Also suitable for private repositories! GitHub Actions use
-  > **cache**, **timeout-minutes**, **paths** and **workflow run**
-  > to reduce the execution time, which means it will significantly
-  > reduce your costs!
+### `Accordion`
 
-  - **Linters**: Help you maintain a consistent code writing style
-    and find errors.
+- `items` (`AccordionItemData[]`, required): data rendered as a list
+  of `AccordionItem`s. Each entry accepts `id` (`number`), `trigger`,
+  `content`, plus every `AccordionItem` prop below (except `children`,
+  which maps to `content`).
 
-  - **Specs**: Automated testing will help you focus on
-    writing better code!
+- `className` (`string`): class applied to the wrapping `div`.
 
-  - **Semantic Release**: For those who are tired of writing changelogs
-    and thinking about what the next version number will be.
+- `exclusive` (`boolean`, default `false`): when `true`, opening one
+  item closes the others.
 
-    > If you have **Branch and Tag Protection** rules configured,
-    > please read this [article](https://gonzalohirsch.com/blog/semantic-release-and-branch-protection-rules).
+### `AccordionItem`
 
-- **TypeScript**: Pre-configured **TypeScript** setup
-  for improved reliability and development convenience.
+- `trigger` (`ReactNode`, required): content rendered inside
+  the `summary` element.
 
-- **Bots**:
+- `children` (`ReactNode`, required): content rendered inside
+  the accordion panel.
 
-  - **Dependabot**: No more wasting time updating dependencies!
-  - **Welcome Bot**: A probot app that welcome new users.
+- `defaultOpen` (`boolean`, default `false`): initial expanded state
+  (uncontrolled).
 
-## Scripts
+- `open` (`boolean`): expanded state (controlled). Pair
+  with `onOpenChange`.
 
-- `init`: Installs dependencies and **Husky**.
+- `onOpenChange` (`(isOpen: boolean) => void`): called when the trigger
+  is clicked.
 
-## Workflows
+- `disabled` (`boolean`, default `false`): ignores clicks on the trigger.
 
-- [`auto-merge-dependabot-pull-request.yaml`](.github/workflows/auto-merge-dependabot-pull-request.yaml):
-  Automatically merges dependabot **Pull Requests** to the **main** branch.
+- `duration` (`number`, default `300`): animation duration
+  in milliseconds.
 
-- [`commitlint.yaml`](.github/workflows/commitlint.yaml):
-  Checks the commit message according
-  to the **Conventional Commits** standard.
+- `easing` (`string`, default `'ease-out'`): animation easing, passed
+  to the Web Animations API.
 
-- [`create-pull-request.yaml`](.github/workflows/create-pull-request.yaml):
-  Automatically creates a **Pull Request**
-  when pushing a branch to the repository.
+- `icon` (`ReactNode` or `(isOpen: boolean) => ReactNode`): rendered
+  after `trigger`; the function form receives the open state.
 
-- [`editorconfig.yaml`](.github/workflows/editorconfig.yaml):
-  Checks all files with **Editorconfig Checker**.
+- `disableTriggerSelection` (`boolean`, default `false`): prevents text
+  selection on the trigger (e.g. on double-click).
 
-  > All ignore files [`.editorconfig-checker.json`](.editorconfig-checker.json).
-
-- [`eslint.yaml`](.github/workflows/eslint.yaml):
-  Checks all **TypeScript** files with **ESLint**.
-
-  > All ignore files [`.remarkignore`](.remarkignore).
-
-- [`pre-commit.yaml`](.github/workflows/pre-commit.yaml):
-  Runs a check on the contents of the **Pull Request** before merging.
-
-- [`prettier.yaml`](.github/workflows/prettier.yaml):
-  Checks all files with **Prettier**.
-
-  > All ignore files [`.prettierignore`](.prettierignore).
-
-- [`release.yaml`](.github/workflows/release.yaml): Creates release.
-
-- [`remark.yaml`](.github/workflows/remark.yaml):
-  Checks all **Markdown** files with **Remark**.
-
-- [`semantic-pull-request-title.yaml`](.github/workflows/semantic-pull-request-title.yaml):
-  Validates the **Pull Request** title
-  against the **conventional commits** standard.
-
-- [`spec.yaml`](.github/workflows/spec.yaml):
-  Tests all **TypeScript** files with **Bun**.
-
-- [`stale.yaml`](.github/workflows/stale.yaml):
-  Removes **Issues** and **Pull Requests** that have not been active
-  for more than **60 days**.
-
-## Change of Maintainer
-
-The following files use the names **Archoleat** and **nikkeyl** by default:
-
-- [`CODEOWNERS`](.github/CODEOWNERS).
-- [`LICENSE`](LICENSE).
-- [`CHANGELOG.md`](CHANGELOG.md).
-- [`package.json`](package.json).
-- [`README.md`](README.md).
-- [`config.yml`](.github/config.yml).
-- [`release.yaml`](.github/workflows/release.yaml).
-
-Before using this template, replace this names with your
-name, name of your team or the name of your organization.
-
-> \[!CAUTION]
-> Don't forget to change your license!
+All other native `details` attributes (`id`, `className`, and so on) are
+forwarded to the underlying `<details>` element. The animation is skipped
+in favor of an instant toggle when the user has `prefers-reduced-motion`
+enabled.
 
 ## Contributing
 
