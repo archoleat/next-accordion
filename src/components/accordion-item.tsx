@@ -1,11 +1,11 @@
-import { type MouseEvent, useLayoutEffect, useRef, useState } from "react";
+import { type MouseEvent, useLayoutEffect, useRef, useState } from 'react';
 
-import { prefersReducedMotion } from "#utils/prefers-reduced-motion.ts";
+import { prefersReducedMotion } from '#utils/prefers-reduced-motion.ts';
 
-import type { AccordionItemProps } from "./accordion-item.props.ts";
+import type { AccordionItemProps } from './accordion-item.props.ts';
 
 const DEFAULT_ANIMATION_DURATION = 300;
-const DEFAULT_ANIMATION_EASING = "ease-out";
+const DEFAULT_ANIMATION_EASING = 'ease-out';
 
 const AccordionItem = (props: AccordionItemProps) => {
   const {
@@ -81,12 +81,12 @@ const AccordionItem = (props: AccordionItemProps) => {
       return undefined;
     }
 
-    details.style.overflow = "hidden";
+    details.style.overflow = 'hidden';
 
     const onFinish = () => {
       details.open = isOpen;
-      details.style.height = "";
-      details.style.overflow = "";
+      details.style.height = '';
+      details.style.overflow = '';
       animationRef.current?.cancel();
       animationRef.current = null;
     };
@@ -103,9 +103,9 @@ const AccordionItem = (props: AccordionItemProps) => {
 
         animationRef.current = details.animate(
           { height: [startHeight, endHeight] },
-          { duration, easing, fill: "forwards" },
+          { duration, easing, fill: 'forwards' },
         );
-        animationRef.current.addEventListener("finish", onFinish);
+        animationRef.current.addEventListener('finish', onFinish);
       });
     } else {
       const startHeight = `${details.offsetHeight}px`;
@@ -113,9 +113,9 @@ const AccordionItem = (props: AccordionItemProps) => {
 
       animationRef.current = details.animate(
         { height: [startHeight, endHeight] },
-        { duration, easing, fill: "forwards" },
+        { duration, easing, fill: 'forwards' },
       );
-      animationRef.current.addEventListener("finish", onFinish);
+      animationRef.current.addEventListener('finish', onFinish);
     }
 
     return () => {
@@ -138,16 +138,16 @@ const AccordionItem = (props: AccordionItemProps) => {
         onClick={onSummaryClick}
         ref={summaryRef}
         style={{
-          cursor: disabled ? undefined : "pointer",
-          listStyle: "none",
-          userSelect: disableTriggerSelection ? "none" : undefined,
-          WebkitUserSelect: disableTriggerSelection ? "none" : undefined,
+          cursor: disabled ? undefined : 'pointer',
+          listStyle: 'none',
+          userSelect: disableTriggerSelection ? 'none' : undefined,
+          WebkitUserSelect: disableTriggerSelection ? 'none' : undefined,
         }}
       >
         {trigger}
-        {typeof icon === "function" ? icon(isOpen) : icon}
+        {typeof icon === 'function' ? icon(isOpen) : icon}
       </summary>
-      <div ref={contentRef} style={{ display: "flow-root" }}>
+      <div ref={contentRef} style={{ display: 'flow-root' }}>
         {children}
       </div>
     </details>

@@ -1,12 +1,12 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-import type { AccordionItemData, AccordionProps } from "./accordion.props.ts";
-import { AccordionItem } from "./accordion-item.tsx";
+import type { AccordionItemData, AccordionProps } from './accordion.props.ts';
+import { AccordionItem } from './accordion-item.tsx';
 
 const Accordion = (props: AccordionProps) => {
   const { className, exclusive = false, items } = props;
 
-  const [openId, setOpenId] = useState<AccordionItemData["id"] | null>(null);
+  const [openId, setOpenId] = useState<AccordionItemData['id'] | null>(null);
 
   return (
     <div className={className}>
