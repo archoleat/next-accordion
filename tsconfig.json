@@ -4,11 +4,15 @@
     "declaration": true,
     "emitDeclarationOnly": true,
     "outDir": "",
-    "lib": ["ESNext"],
+    "jsx": "react-jsx",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "target": "ESNext",
     "allowImportingTsExtensions": true,
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
+    "paths": {
+      "#utils/*": ["./src/utils/*"]
+    },
     "rootDir": "src",
     "disableReferencedProjectLoad": true,
     "allowUnreachableCode": false,

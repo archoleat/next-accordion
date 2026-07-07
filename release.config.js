@@ -81,6 +81,7 @@ export default defineConfig({
         changelogTitle: '# Changelog',
       },
     ],
+    '@semantic-release/npm',
     '@semantic-release/git',
     '@semantic-release/github',
   ],
