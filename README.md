@@ -1,5 +1,7 @@
 # Next Accordion
 
+![NPM Version](https://img.shields.io/npm/v/%40archoleat%2Fnext-accordion)
+![NPM Downloads](https://img.shields.io/npm/dm/%40archoleat%2Fnext-accordion)
 ![Specs](https://img.shields.io/github/actions/workflow/status/archoleat/next-accordion/spec.yaml?label=Specs)
 ![Commitlint](https://img.shields.io/github/actions/workflow/status/archoleat/next-accordion/commitlint.yaml?label=Commitlint)
 ![Editorconfig](https://img.shields.io/github/actions/workflow/status/archoleat/next-accordion/editorconfig.yaml?label=Editorconfig)
