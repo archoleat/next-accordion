@@ -1,15 +1,17 @@
 import { type MouseEvent, useLayoutEffect, useRef, useState } from 'react';
 
+import {
+  DEFAULT_ANIMATION_DURATION,
+  DEFAULT_ANIMATION_EASING,
+} from '#utils/constants.ts';
 import { prefersReducedMotion } from '#utils/prefers-reduced-motion.ts';
 
-import type { AccordionItemProps } from './accordion-item.props.ts';
+import type { Props } from './accordion-item.props.ts';
 
-const DEFAULT_ANIMATION_DURATION = 300;
-const DEFAULT_ANIMATION_EASING = 'ease-out';
-
-const AccordionItem = (props: AccordionItemProps) => {
+const AccordionItem = (props: Props) => {
   const {
     children,
+    contentClassName,
     defaultOpen = false,
     disabled = false,
     disableTriggerSelection = false,
@@ -19,6 +21,7 @@ const AccordionItem = (props: AccordionItemProps) => {
     onOpenChange,
     open,
     trigger,
+    triggerClassName,
     ...detailsProps
   } = props;
 
@@ -135,6 +138,7 @@ const AccordionItem = (props: AccordionItemProps) => {
     >
       <summary
         aria-disabled={disabled}
+        className={triggerClassName}
         onClick={onSummaryClick}
         ref={summaryRef}
         style={{
@@ -147,7 +151,11 @@ const AccordionItem = (props: AccordionItemProps) => {
         {trigger}
         {typeof icon === 'function' ? icon(isOpen) : icon}
       </summary>
-      <div ref={contentRef} style={{ display: 'flow-root' }}>
+      <div
+        className={contentClassName}
+        ref={contentRef}
+        style={{ display: 'flow-root' }}
+      >
         {children}
       </div>
     </details>
