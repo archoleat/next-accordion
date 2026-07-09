@@ -1,10 +1,11 @@
 import type { DetailsHTMLAttributes, ReactNode } from 'react';
 
-type AccordionItemProps = Omit<
+type Props = Omit<
   DetailsHTMLAttributes<HTMLDetailsElement>,
   'children' | 'onToggle' | 'open'
 > & {
   children: ReactNode;
+  contentClassName?: string;
   defaultOpen?: boolean;
   disabled?: boolean;
   disableTriggerSelection?: boolean;
@@ -14,6 +15,7 @@ type AccordionItemProps = Omit<
   onOpenChange?: (isOpen: boolean) => void;
   open?: boolean;
   trigger: ReactNode;
+  triggerClassName?: string;
 };
 
-export type { AccordionItemProps };
+export type { Props };
