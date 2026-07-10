@@ -6,17 +6,20 @@ import type { OpenIdType, Props as AccordionProps } from './accordion.props.ts';
 
 const Accordion = (props: AccordionProps) => {
   const {
+    children,
     className,
     defaultOpenId = null,
     exclusive = false,
+    items,
     onOpenIdChange,
+    openId,
   } = props;
 
   const [uncontrolledOpenId, setUncontrolledOpenId] =
     useState<OpenIdType>(defaultOpenId);
 
-  const isControlled = props.openId !== undefined;
-  const openId = isControlled ? props.openId : uncontrolledOpenId;
+  const isControlled = openId !== undefined;
+  const currentOpenId = isControlled ? openId : uncontrolledOpenId;
 
   const setOpenId = (nextOpenId: OpenIdType) => {
     if (!isControlled) {
@@ -26,17 +29,17 @@ const Accordion = (props: AccordionProps) => {
     onOpenIdChange?.(nextOpenId);
   };
 
-  if (props.items) {
+  if (items) {
     return (
       <ul className={className}>
-        {props.items.map(({ content, id, onOpenChange, ...restItemProps }) => {
+        {items.map(({ content, id, onOpenChange, ...restItemProps }) => {
           const openProps = exclusive
             ? {
                 onOpenChange: (isOpen: boolean) => {
                   setOpenId(isOpen ? id : null);
                   onOpenChange?.(isOpen);
                 },
-                open: openId === id,
+                open: currentOpenId === id,
               }
             : {};
           const changeProps = !exclusive && onOpenChange ? { onOpenChange } : {};
@@ -55,7 +58,7 @@ const Accordion = (props: AccordionProps) => {
 
   return (
     <ul className={className}>
-      {Children.map(props.children, (child, index) => {
+      {Children.map(children, (child, index) => {
         const id = isValidElement(child) ? (child.key ?? index) : index;
 
         if (
@@ -71,7 +74,7 @@ const Accordion = (props: AccordionProps) => {
                 setOpenId(isOpen ? id : null);
                 child.props.onOpenChange?.(isOpen);
               },
-              open: openId === id,
+              open: currentOpenId === id,
             }
           : {};
 
