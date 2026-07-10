@@ -27,7 +27,8 @@
     "react-accordion",
     "react",
     "summary",
-    "typescript"
+    "typescript",
+    "zero-deps"
   ],
   "engines": {
     "bun": ">=1.0.0"

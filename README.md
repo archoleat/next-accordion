@@ -8,6 +8,7 @@
 ![Prettier](https://img.shields.io/github/actions/workflow/status/archoleat/next-accordion/prettier.yaml?label=Prettier)
 ![ESLint](https://img.shields.io/github/actions/workflow/status/archoleat/next-accordion/eslint.yaml?label=ESLint)
 ![Remark](https://img.shields.io/github/actions/workflow/status/archoleat/next-accordion/remark.yaml?label=Remark)
+![Zero Deps](https://img.shields.io/badge/zero_dependencies-blue)
 
 ## Table of Contents
 
