@@ -9,6 +9,7 @@
 ![ESLint](https://img.shields.io/github/actions/workflow/status/archoleat/next-accordion/eslint.yaml?label=ESLint)
 ![Remark](https://img.shields.io/github/actions/workflow/status/archoleat/next-accordion/remark.yaml?label=Remark)
 ![Zero Deps](https://img.shields.io/badge/zero_dependencies-blue)
+![AI](https://img.shields.io/badge/AI-red)
 
 ## Table of Contents
 
