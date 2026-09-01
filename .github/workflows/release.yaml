@@ -48,7 +48,7 @@ jobs:
         run: bun ci
 
       - name: Build
-        run: bun rollup -c --configPlugin typescript
+        run: bun rollup -c
 
       - name: Create Release
         env:
