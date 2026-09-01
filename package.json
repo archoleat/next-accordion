@@ -1,7 +1,7 @@
 {
   "name": "@archoleat/next-accordion",
   "description": "Animated React accordion using details and summary",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "license": "MIT",
   "author": {
     "email": "nikkeyl.me@gmail.com",
