@@ -1,8 +1,13 @@
 {
   "exclude": [
+    "accordion.props.ts",
+    "accordion.tsx",
     "CHANGELOG.md",
     "config.yml",
+    "index.spec.tsx",
+    "index.tsx",
     "README.md",
+    "release.yaml",
     "semantic-pull-request-title.yaml"
   ]
 }
