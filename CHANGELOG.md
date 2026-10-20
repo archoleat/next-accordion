@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.2.1](https://github.com/archoleat/next-accordion/compare/v1.2.0...v1.2.1) (2026-10-20)
+
+### Bug Fixes
+
+* keywords in package.json ([4072175](https://github.com/archoleat/next-accordion/commit/40721755bec7305d3e923209f4521f0412a12d76))
+
 ## [1.2.0](https://github.com/archoleat/next-accordion/compare/v1.1.0...v1.2.0) (2026-09-01)
 
 ### Features
