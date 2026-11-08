@@ -26,7 +26,7 @@ Animated React accordion using details and summary
 ## Installation
 
 ```sh
-bun i -D @archoleat/next-accordion
+bun i @archoleat/next-accordion
 ```
 
 ## Usage
