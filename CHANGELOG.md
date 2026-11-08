@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.2](https://github.com/archoleat/next-accordion/compare/v1.2.1...v1.2.2) (2026-11-08)
+
+### Bug Fixes
+
+* preserve client boundary and initial server state ([a398abd](https://github.com/archoleat/next-accordion/commit/a398abd0e1fd4e8fd3e11f1ecdde44b66cf95860))
+* use stable Node.js for releases ([06d020d](https://github.com/archoleat/next-accordion/commit/06d020da51b4f31c0b87a8b22c877e8e213851ff))
+
 ## [1.2.1](https://github.com/archoleat/next-accordion/compare/v1.2.0...v1.2.1) (2026-10-20)
 
 ### Bug Fixes
