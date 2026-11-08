@@ -24,6 +24,7 @@ export default defineConfig([
     input: `${sourceFolder}/${entryFile}`,
     external,
     output: {
+      banner: '"use client";',
       file: outputFile,
       format: fileFormat,
     },

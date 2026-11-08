@@ -112,6 +112,40 @@ describe('AccordionItem', () => {
     },
   );
 
+  spec('should keep details open until the closing animation finishes', () => {
+    const originalAnimate = Element.prototype.animate;
+    let finish: (() => void) | undefined;
+
+    Element.prototype.animate = () =>
+      ({
+        addEventListener: (type: string, listener: () => void) => {
+          if (type === 'finish') {
+            finish = listener;
+          }
+        },
+        cancel: () => {},
+      }) as unknown as Animation;
+
+    try {
+      render(
+        <AccordionItem defaultOpen trigger="Animated summary">
+          Content
+        </AccordionItem>,
+      );
+
+      const summary = screen.getByText('Animated summary');
+      const details = summary.closest('details');
+      fireEvent.click(summary);
+
+      expect(finish).toBeDefined();
+      expect(details?.open).toBe(true);
+      finish?.();
+      expect(details?.open).toBe(false);
+    } finally {
+      Element.prototype.animate = originalAnimate;
+    }
+  });
+
   spec('should ignore clicks when disabled', () => {
     const onOpenChange = mock();
 

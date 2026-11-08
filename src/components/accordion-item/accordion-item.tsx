@@ -26,6 +26,7 @@ const AccordionItem = (props: Props) => {
   } = props;
 
   const [uncontrolledOpen, setUncontrolledOpen] = useState(defaultOpen);
+  const initialOpenRef = useRef(open ?? defaultOpen);
 
   const detailsRef = useRef<HTMLDetailsElement>(null);
   const summaryRef = useRef<HTMLElement>(null);
@@ -134,6 +135,7 @@ const AccordionItem = (props: Props) => {
     <details
       {...detailsProps}
       data-disabled={disabled || undefined}
+      open={initialOpenRef.current}
       ref={detailsRef}
     >
       <summary
