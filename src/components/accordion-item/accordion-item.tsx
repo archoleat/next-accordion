@@ -3,8 +3,8 @@ import { type MouseEvent, useLayoutEffect, useRef, useState } from 'react';
 import {
   DEFAULT_ANIMATION_DURATION,
   DEFAULT_ANIMATION_EASING,
-} from '#utils/constants.ts';
-import { prefersReducedMotion } from '#utils/prefers-reduced-motion.ts';
+} from '#utils/constants.js';
+import { prefersReducedMotion } from '#utils/prefers-reduced-motion.js';
 
 import type { Props } from './accordion-item.props.ts';
 

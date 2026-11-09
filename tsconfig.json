@@ -8,6 +8,7 @@
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "target": "ESNext",
     "allowImportingTsExtensions": true,
+    "rewriteRelativeImportExtensions": true,
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
     "paths": {
