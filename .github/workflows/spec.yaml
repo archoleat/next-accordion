@@ -12,6 +12,22 @@ on:
       - 'README.md'
       - 'src/**/*.tsx'
       - 'src/**/*.ts'
+      - 'src/**'
+      - 'specs/**'
+      - 'bun.lock'
+      - 'bun.lockb'
+      - 'bunfig.toml'
+      - 'tsconfig*.json'
+      - '*.config.*'
+      - '.npmrc'
+      - '.bun-version'
+      - '.node-version'
+      - '.nvmrc'
+      - '.github/workflows/**'
+      - '.pre-commit-config.yaml'
+      - '.editorconfig'
+      - '.editorconfig-checker.json'
+      - '.prettierignore'
 
 permissions:
   contents: read
@@ -47,7 +63,23 @@ jobs:
               ':(glob)package.json' \
               ':(glob)README.md' \
               ':(glob)src/**/*.tsx' \
-              ':(glob)src/**/*.ts'; then
+              ':(glob)src/**/*.ts' \
+              ':(glob)src/**' \
+              ':(glob)specs/**' \
+              ':(glob)bun.lock' \
+              ':(glob)bun.lockb' \
+              ':(glob)bunfig.toml' \
+              ':(glob)tsconfig*.json' \
+              ':(glob)*.config.*' \
+              ':(glob).npmrc' \
+              ':(glob).bun-version' \
+              ':(glob).node-version' \
+              ':(glob).nvmrc' \
+              ':(glob).github/workflows/**' \
+              ':(glob).pre-commit-config.yaml' \
+              ':(glob).editorconfig' \
+              ':(glob).editorconfig-checker.json' \
+              ':(glob).prettierignore'; then
             echo 'run=false' >> "$GITHUB_OUTPUT"
           else
             status=$?

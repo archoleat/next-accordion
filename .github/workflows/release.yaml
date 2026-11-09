@@ -23,8 +23,15 @@ jobs:
       github.event.workflow_run.head_branch == 'main' &&
       github.event.workflow_run.conclusion == 'success' }}
 
+    concurrency:
+      group: release-${{ github.repository }}-${{ github.event.workflow_run.head_sha }}
+      cancel-in-progress: false
+
+    env:
+      RELEASE_SHA: ${{ github.event.workflow_run.head_sha }}
+
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 20
 
     steps:
       - name: Generate Token
@@ -37,26 +44,87 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
+          ref: ${{ github.event.workflow_run.head_sha }}
           fetch-depth: 0
           token: ${{ steps.generate_token.outputs.token }}
 
+      - name: Verify Release Revision
+        id: revision
+        run: |
+          set -euo pipefail
+
+          CURRENT_SHA=$(git ls-remote --exit-code origin refs/heads/main | cut -f1)
+
+          if [[ "$CURRENT_SHA" != "$RELEASE_SHA" ]]; then
+            echo 'main has advanced; skipping this release.'
+            echo 'current=false' >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          git checkout -B main "$RELEASE_SHA"
+
+          echo 'current=true' >> "$GITHUB_OUTPUT"
+
       - name: Set Up Node
+        if: ${{ steps.revision.outputs.current == 'true' }}
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
         with:
           node-version: 'lts/*'
           check-latest: true
 
       - name: Set Up Bun
+        if: ${{ steps.revision.outputs.current == 'true' }}
         uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6
 
       - name: Install Dependencies
+        if: ${{ steps.revision.outputs.current == 'true' }}
         run: bun ci
 
+      - name: Set Up Python
+        if: ${{ steps.revision.outputs.current == 'true' }}
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
+        with:
+          python-version: 3.13
+
+      - name: Pre Commit
+        if: ${{ steps.revision.outputs.current == 'true' }}
+        uses: pre-commit/action@2c7b3805fd2a0fd8c1884dcaebf91fc102a13ecd
+
+      - name: Verify Release Quality
+        if: ${{ steps.revision.outputs.current == 'true' }}
+        run: |
+          set -euo pipefail
+
+          COMMIT_MESSAGE=$(git log -1 --pretty=%B)
+
+          printf '%s\n' "$COMMIT_MESSAGE" | bun commitlint
+
+          bun eslint 'src/**/*.{tsx,ts}'
+          bun prettier . --check
+          bun editorconfig-checker
+          bun test
+
+          test "$(git rev-parse HEAD)" = "$RELEASE_SHA"
+
+          git diff --exit-code
+
       - name: Build
+        if: ${{ steps.revision.outputs.current == 'true' }}
         run: bun rollup -c
 
       - name: Create Release
+        if: ${{ steps.revision.outputs.current == 'true' }}
         env:
           GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
           NPM_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
-        run: bun semantic-release
+        run: |
+          set -euo pipefail
+
+          CURRENT_SHA=$(git ls-remote --exit-code origin refs/heads/main | cut -f1)
+
+          if [[ "$CURRENT_SHA" != "$RELEASE_SHA" ]]; then
+            echo 'main has advanced; skipping publication.'
+            exit 0
+          fi
+
+          bun semantic-release
