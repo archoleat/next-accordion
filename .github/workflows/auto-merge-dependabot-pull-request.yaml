@@ -1,9 +1,11 @@
 name: Auto Merge Dependabot Pull Request
 
 on:
-  pull_request_target:
-    branches:
-      - main
+  workflow_run:
+    workflows:
+      - Spec
+    types:
+      - completed
 
 permissions:
   contents: write
@@ -13,15 +15,45 @@ jobs:
   auto-merge-dependabot-pull-request:
     name: Auto Merge Dependabot Pull Request
 
-    if: ${{ github.actor == 'dependabot[bot]' }}
+    if: >-
+      ${{ github.event.workflow_run.event == 'pull_request' &&
+      github.event.workflow_run.conclusion == 'success' }}
 
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
     env:
-      PR_URL: ${{ github.event.pull_request.html_url }}
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
-      - name: Merge
-        run: gh pr merge $PR_URL --auto --squash
+      - name: Enable Auto Merge
+        run: |
+          set -euo pipefail
+
+          REQUESTS=$(jq -r '.workflow_run.pull_requests[]? | [.number, .head.sha] | @tsv' "$GITHUB_EVENT_PATH")
+
+          if [[ -z "$REQUESTS" ]]; then
+            echo 'No associated pull requests.'
+            exit 0
+          fi
+
+          while IFS=$'\t' read -r PR_NUMBER EXPECTED_SHA; do
+            if [[ ! "$PR_NUMBER" =~ ^[0-9]+$ || ! "$EXPECTED_SHA" =~ ^[0-9a-f]{40}$ ]]; then
+              echo 'Invalid pull request metadata.' >&2
+              exit 1
+            fi
+
+            PULL_REQUEST=$(gh api "repos/$GITHUB_REPOSITORY/pulls/$PR_NUMBER")
+
+            if jq -e --arg repository "$GITHUB_REPOSITORY" --arg sha "$EXPECTED_SHA" '
+              .state == "open" and
+              .draft == false and
+              .user.login == "dependabot[bot]" and
+              .base.ref == "main" and
+              .base.repo.full_name == $repository and
+              .head.repo.full_name == $repository and
+              .head.sha == $sha
+            ' <<< "$PULL_REQUEST" > /dev/null; then
+              gh pr merge "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --auto --squash --match-head-commit "$EXPECTED_SHA"
+            fi
+          done <<< "$REQUESTS"

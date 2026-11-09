@@ -26,10 +26,10 @@ jobs:
 
           stale-issue-label: 'status: stale'
           stale-issue-message: This issue is stale. You can reopen it again.
-          close-issue-label: 'status: close'
+          close-issue-label: 'status: closed'
           close-issue-message: This issue is closed.
 
           stale-pr-label: 'status: stale'
           stale-pr-message: This Pull Request is stale. You can reopen it again.
-          close-pr-label: 'status: close'
+          close-pr-label: 'status: closed'
           close-pr-message: This Pull Request is closed.
