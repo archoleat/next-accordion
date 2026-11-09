@@ -8,3 +8,4 @@ repos:
         args: [--fix=lf]
 
       - id: trailing-whitespace
+        exclude: '^patches/.*\.patch$'

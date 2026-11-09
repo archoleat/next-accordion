@@ -94,5 +94,11 @@
     "semantic-release": "^25.0.5",
     "tslib": "^2.8.1",
     "typescript": "^6.0.2"
+  },
+  "patchedDependencies": {
+    "glob@10.5.0": "patches/glob@10.5.0.patch",
+    "minimatch@9.0.9": "patches/minimatch@9.0.9.patch",
+    "minimatch@10.2.6": "patches/minimatch@10.2.6.patch",
+    "npm@11.21.2": "patches/npm@11.21.2.patch"
   }
 }
