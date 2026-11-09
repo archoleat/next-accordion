@@ -11,6 +11,7 @@ on:
       - main
 
 permissions:
+  contents: read
   id-token: write
 
 jobs:
@@ -98,6 +99,8 @@ jobs:
 
       - name: Verify Release Quality
         if: ${{ steps.revision.outputs.current == 'true' }}
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
 

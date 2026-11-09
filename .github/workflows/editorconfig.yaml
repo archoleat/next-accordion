@@ -29,4 +29,6 @@ jobs:
         run: bun ci
 
       - name: Lint
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         run: bun editorconfig-checker
