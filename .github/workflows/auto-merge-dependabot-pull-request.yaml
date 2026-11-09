@@ -30,7 +30,11 @@ jobs:
         run: |
           set -euo pipefail
 
-          REQUESTS=$(jq -r '.workflow_run.pull_requests[]? | [.number, .head.sha] | @tsv' "$GITHUB_EVENT_PATH")
+          REQUESTS=$(jq -r '
+            .workflow_run.pull_requests[]? |
+            [.number, .head.sha] |
+            @tsv
+          ' "$GITHUB_EVENT_PATH")
 
           if [[ -z "$REQUESTS" ]]; then
             echo 'No associated pull requests.'
@@ -38,14 +42,17 @@ jobs:
           fi
 
           while IFS=$'\t' read -r PR_NUMBER EXPECTED_SHA; do
-            if [[ ! "$PR_NUMBER" =~ ^[0-9]+$ || ! "$EXPECTED_SHA" =~ ^[0-9a-f]{40}$ ]]; then
+            if [[ ! "$PR_NUMBER" =~ ^[0-9]+$ ||
+                  ! "$EXPECTED_SHA" =~ ^[0-9a-f]{40}$ ]]; then
               echo 'Invalid pull request metadata.' >&2
               exit 1
             fi
 
             PULL_REQUEST=$(gh api "repos/$GITHUB_REPOSITORY/pulls/$PR_NUMBER")
 
-            if jq -e --arg repository "$GITHUB_REPOSITORY" --arg sha "$EXPECTED_SHA" '
+            if jq -e \
+              --arg repository "$GITHUB_REPOSITORY" \
+              --arg sha "$EXPECTED_SHA" '
               .state == "open" and
               .draft == false and
               .user.login == "dependabot[bot]" and
@@ -54,6 +61,7 @@ jobs:
               .head.repo.full_name == $repository and
               .head.sha == $sha
             ' <<< "$PULL_REQUEST" > /dev/null; then
-              gh pr merge "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --auto --squash --match-head-commit "$EXPECTED_SHA"
+              gh pr merge "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" \
+                --auto --squash --match-head-commit "$EXPECTED_SHA"
             fi
           done <<< "$REQUESTS"
