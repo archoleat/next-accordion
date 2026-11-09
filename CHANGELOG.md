@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.2.5](https://github.com/archoleat/next-accordion/compare/v1.2.4...v1.2.5) (2026-11-09)
+
+### Bug Fixes
+
+* align package description with repository metadata ([ddf2459](https://github.com/archoleat/next-accordion/commit/ddf24593cc9b283759d73ee8796932ed61e7eb40))
+
 ## [1.2.4](https://github.com/archoleat/next-accordion/compare/v1.2.3...v1.2.4) (2026-11-09)
 
 ### Bug Fixes

@@ -1,7 +1,7 @@
 {
   "name": "@archoleat/next-accordion",
   "description": "Animated React accordion built with native details and summary elements. (AI)",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "license": "MIT",
   "author": {
     "email": "nikkeyl.me@gmail.com",
