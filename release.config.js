@@ -21,7 +21,7 @@ export default defineConfig({
           },
           {
             type: 'docs',
-            release: false,
+            release: 'patch',
           },
           {
             type: 'feat',

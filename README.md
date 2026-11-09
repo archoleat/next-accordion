@@ -14,6 +14,7 @@
 ## Table of Contents
 
 - [Installation](#installation)
+- [Runtime](#runtime)
 - [Usage](#usage)
 - [Styling](#styling)
 - [Props](#props)
@@ -28,6 +29,13 @@ Animated React accordion using details and summary
 ```sh
 bun i @archoleat/next-accordion
 ```
+
+## Runtime
+
+The package is an ES module for React 18 or later. Its entry point preserves
+the `use client` directive for Next.js App Router. Initial open state is
+rendered on the server; animation and interaction run in the browser. Bun is
+used for repository tooling, not required by a consuming React application.
 
 ## Usage
 
