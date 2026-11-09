@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.2.4](https://github.com/archoleat/next-accordion/compare/v1.2.3...v1.2.4) (2026-11-09)
+
+### Bug Fixes
+
+* align npm keywords with repository topics ([7b880c3](https://github.com/archoleat/next-accordion/commit/7b880c33ee02c6fe1a54cf630ad106eaba522f29))
+
 ## [1.2.3](https://github.com/archoleat/next-accordion/compare/v1.2.2...v1.2.3) (2026-11-09)
 
 ### Bug Fixes
