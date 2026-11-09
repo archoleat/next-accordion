@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.2.3](https://github.com/archoleat/next-accordion/compare/v1.2.2...v1.2.3) (2026-11-09)
+
+### Bug Fixes
+
+* publish current documentation and runtime guidance ([f9383b8](https://github.com/archoleat/next-accordion/commit/f9383b8463fe72d5a2150248ae6ab9f109f5da02))
+
+### Documentation
+
+* install the accordion as a runtime dependency ([754c84e](https://github.com/archoleat/next-accordion/commit/754c84e7b717524c56040d189d1d18364d367212))
+
 ## [1.2.2](https://github.com/archoleat/next-accordion/compare/v1.2.1...v1.2.2) (2026-11-08)
 
 ### Bug Fixes
