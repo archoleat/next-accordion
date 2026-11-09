@@ -18,16 +18,11 @@
   },
   "keywords": [
     "accordion",
-    "animation",
     "archoleat",
     "details",
-    "nextjs",
     "react",
-    "react-accordion",
     "summary",
-    "typescript",
-    "web-animations-api",
-    "zero-deps"
+    "typescript"
   ],
   "type": "module",
   "types": "index.d.ts",
