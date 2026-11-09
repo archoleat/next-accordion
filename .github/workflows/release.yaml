@@ -88,7 +88,10 @@ jobs:
 
       - name: Pre Commit
         if: ${{ steps.revision.outputs.current == 'true' }}
-        uses: pre-commit/action@2c7b3805fd2a0fd8c1884dcaebf91fc102a13ecd
+        run: |
+          python -m pip install pre-commit
+
+          pre-commit run --all-files --show-diff-on-failure
 
       - name: Verify Release Quality
         if: ${{ steps.revision.outputs.current == 'true' }}
